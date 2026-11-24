@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodeHOI</title>
+<meta name="description" content="CodeHOI writes physically plausible 4D hand-object interaction as a program, across rigid, deformable, co-dimensional and flowing matter.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CodeHOI: Code with Agents for Physically Plausible 4D Hand-Object Interaction">
+<meta property="og:description" content="Agents write the objects, hands and physics of an interaction as one program, run it with established solvers and verify it against physical laws.">
+<meta property="og:url" content="https://shpark97.github.io/CodeHOI/">
+<meta property="og:image" content="https://shpark97.github.io/CodeHOI/static/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23a0457a'/%3E%3Cpath d='M12 9.5 6.5 16l5.5 6.5M20 9.5 25.5 16 20 22.5' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="static/css/style.css?v=20261123o">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">Code<b>HOI</b></a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#reconstruction">Reconstruction</a>
+      <a href="#generation">Generation</a>
+      <a href="#simulation">Simulation</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#bibtex">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="badge">Preprint · 2026</div>
+  <h1>Code<b>HOI</b></h1>
+  <p class="subtitle">Code with Agents for Physically Plausible 4D Hand-Object Interaction</p>
+  <!-- authors: edit this line and the BibTeX entry at the bottom of the page -->
+  <p class="authors"><a href="https://shpark97.github.io/">Seonghwan Park</a><a href="https://scholar.google.com/citations?user=vI1clmUAAAAJ&amp;hl=en">Inho Chang</a><a href="https://scholar.google.com/citations?user=VUj1ZWoAAAAJ&amp;hl=en">Min-Gyu Park</a></p>
+  <p class="affil">Korea Electronics Technology Institute (KETI)</p>
+  <div class="buttons">
+    <a class="btn ghost" href="https://arxiv.org/abs/2611.31976">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paper</a>
+    <span class="btn disabled" aria-disabled="true" title="Coming soon">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5"/></svg>Code <span class="soon">soon</span></span>
+    <a class="btn ghost" href="#bibtex">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5H6.5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 1 3.5 11h0A1.5 1.5 0 0 1 5 12.5v5A1.5 1.5 0 0 0 6.5 19H8M16 5h1.5A1.5 1.5 0 0 1 19 6.5v3a1.5 1.5 0 0 0 1.5 1.5h0a1.5 1.5 0 0 0-1.5 1.5v5a1.5 1.5 0 0 1-1.5 1.5H16"/></svg>BibTeX</a>
+  </div>
+  <p class="tldr"><b>TL;DR.</b> CodeHOI writes physically plausible 4D hand-object interaction as a program. Agents build each object with its own physics, specify the hands by their contacts, simulate each kind of matter with an established physics solver and verify the result against physical laws. One framework thus covers both reconstruction and generation across rigid, deformable, co-dimensional and flowing matter.</p>
+  <div class="pills">
+    <span class="pill">4D Hand-Object Interaction</span><span class="pill">Coding Agents</span><span class="pill">Physics Simulation</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================ overview: one run, from its input to its accepted result -->
+<section id="overview" class="first"><div class="wrap">
+  <!-- main.js fills this card from static/data/site.js: the result, the input, the Evaluator Agent's rounds, and the
+       program as the agents wrote it (excerpts of the run's own files, with their line numbers) -->
+  <noscript><p class="cap">Enable JavaScript to view the results.</p></noscript>
+  <div class="run" id="run">
+    <div class="run-top">
+      <div class="run-view">
+        <video muted playsinline preload="auto" aria-label="The interaction this run wrote, rendered"></video>
+      </div>
+      <div class="run-side">
+        <div>
+          <p class="block-h">Input <span data-run="mode"></span><span class="tags"></span></p>
+          <div class="in-row" data-run="input"></div>
+        </div>
+        <div>
+          <p class="block-h">Evaluator Agent</p>
+          <ol class="rounds" data-run="rounds"></ol>
+        </div>
+        <!-- the four runs, one per kind of matter: main.js fills these buttons -->
+        <div class="picker" role="tablist" aria-label="Kind of matter of the run shown"></div>
+      </div>
+    </div>
+    <div class="run-code">
+      <div class="code-bar">
+        <span class="code-title">Program</span>
+        <div class="code-tabs" role="tablist" aria-label="Parts of the program" style="display:contents"></div>
+        <span class="code-file"></span>
+      </div>
+      <div class="code-body" tabindex="0" role="tabpanel" aria-label="Excerpt of the program"></div>
+    </div>
+  </div>
+  <p class="cap">Program excerpts and reviews are verbatim from each run.</p>
+</div></section>
+
+<!-- ============================================================ method -->
+<section id="method"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">Method</span>
+    <h2>Three agents write, run and check one program</h2>
+    <p class="lead">Each stage is a closed loop of writing, evaluation and revision that ends when a round is accepted or the revision budget is spent.</p>
+  </div>
+  <div class="figure">
+    <img src="static/img/overview.webp" width="2400" height="1101" loading="lazy" alt="Overview of CodeHOI on one run. From a photograph and the instruction to lift a mug by its handle, the Object Agent builds the mug with named parts, the HOI Agent assigns roles to the parts, plans keypoints and poses the MANO hand, and the Evaluator Agent returns round 0 because the index finger penetrates the handle and accepts the revised round 1.">
+  </div>
+  <div class="agents">
+    <article class="agent" data-agent="object">
+      <div class="agent-h"><span class="agent-n">1</span><h3>Object Agent</h3></div>
+      <p>Builds each object at real size with named parts, joints and its own physics.</p>
+    </article>
+    <article class="agent" data-agent="hoi">
+      <div class="agent-h"><span class="agent-n">2</span><h3>HOI Agent</h3></div>
+      <p>Specifies each hand by its contacts, fits MANO to them and simulates how each object responds.</p>
+    </article>
+    <article class="agent" data-agent="eval">
+      <div class="agent-h"><span class="agent-n">3</span><h3>Evaluator Agent</h3></div>
+      <p>Checks each result by measurement and from its renders, then accepts it or returns a review.</p>
+    </article>
+  </div>
+
+  <div class="sub-head">
+    <h3>An established solver for each kind of matter</h3>
+    <p>Rigid objects follow the grasping hand or rigid-body dynamics, and non-rigid matter runs on the solver of its regime. All solvers share one scene and the same hands, so a single program can mix kinds of matter.</p>
+  </div>
+  <div class="solvers">
+    <div class="solver" data-matter="deformable"><span class="tag">MPM</span><b>Plastic and granular matter</b><p>Dough, slime and grains that lose their rest shape.</p></div>
+    <div class="solver" data-matter="deformable"><span class="tag">FEM</span><b>Elastic solids</b><p>Soft bodies that recover their rest shape.</p></div>
+    <div class="solver" data-matter="codim"><span class="tag">XPBD</span><b>Co-dimensional matter</b><p>Cloth, rope and paper, thinner than a grid cell.</p></div>
+    <div class="solver" data-matter="flowing"><span class="tag">FLIP</span><b>Liquids</b><p>Thin, incompressible liquids such as water.</p></div>
+  </div>
+</div></section>
+
+<!-- ============================================================ reconstruction: main.js builds two clips per kind of matter -->
+<section id="reconstruction"><div class="wrap">
+  <div class="sec-bar">
+    <div class="sec-head">
+      <span class="kicker">4D HOI Reconstruction</span>
+      <h2>From a single RGB video</h2>
+      <p class="lead">CodeHOI recovers the hands, the objects and the state of the matter in every frame.</p>
+    </div>
+    <div class="tabs-row">
+      <div class="mtabs" role="tablist" aria-label="Kind of matter" data-tabs="rec"></div>
+      <span class="tags" data-rec-solvers aria-label="Solvers of the clips shown"></span>
+    </div>
+  </div>
+  <div id="rec">
+    <div class="rec-head" aria-hidden="true"><span>Input Video</span><span>Camera View</span><span>Novel View</span></div>
+  </div>
+</div></section>
+
+<!-- ============================================================ generation: main.js builds six tasks per kind of matter -->
+<section id="generation"><div class="wrap">
+  <div class="sec-bar">
+    <div class="sec-head">
+      <span class="kicker">4D HOI Generation</span>
+      <h2>From an image, a 3D scene or text</h2>
+      <p class="lead">CodeHOI writes an interaction that follows an instruction, where success hinges on how the matter responds.</p>
+    </div>
+    <div class="mtabs" role="tablist" aria-label="Kind of matter" data-tabs="gen"></div>
+  </div>
+  <div id="gen"></div>
+</div></section>
+
+<!-- ============================================================ simulation: main.js builds three examples per kind of matter,
+     each CodeHOI result (Reference) over the robot hands tracking it in Genesis (Tracking), as in the supplementary -->
+<section id="simulation"><div class="wrap">
+  <div class="sec-bar">
+    <div class="sec-head">
+      <span class="kicker">Transfer to Simulation</span>
+      <h2>To dexterous robot hands in another physics engine</h2>
+      <p class="lead">Robot hands in Genesis follow the hand motion without a learned policy, and the engine simulates each object with the physics it carries.</p>
+    </div>
+    <div class="mtabs" role="tablist" aria-label="Kind of matter" data-tabs="sim"></div>
+  </div>
+  <div id="sim"></div>
+  <p class="cap">Reference: the CodeHOI result. Tracking: SharpaWave hands on Franka arms in Genesis.</p>
+</div></section>
+
+<!-- ============================================================ benchmark -->
+<section id="benchmark"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">CodeHOI-Bench</span>
+    <h2>100 tasks across four kinds of matter</h2>
+    <p class="lead">CodeHOI-Bench comprises 20 real-world reconstruction clips and 80 generation tasks, balanced across the four kinds of matter.</p>
+  </div>
+  <div class="bench">
+    <div class="card">
+      <div class="card-h">
+        <h3>Clips and tasks per input<small>One square per clip or task, one row per kind of matter.</small></h3>
+        <div class="legend">
+          <span class="mdot" data-matter="rigid">Rigid</span><span class="mdot" data-matter="deformable">Deformable</span><span class="mdot" data-matter="codim">Co-dimensional</span><span class="mdot" data-matter="flowing">Flowing</span>
+        </div>
+      </div>
+      <div class="waffle" id="waffle"></div>
+    </div>
+    <div class="card">
+      <div class="card-h">
+        <h3>Generation with each backbone<small id="measure-note"></small></h3>
+        <div class="seg" role="group" aria-label="Measure" id="measure">
+          <button type="button" data-measure="sr" aria-pressed="true">Success rate</button><button type="button" data-measure="phys" aria-pressed="false">Physical plausibility</button>
+        </div>
+      </div>
+      <div class="meters" id="meters"></div>
+      <details class="table">
+        <summary>Full table</summary>
+        <div class="tscroll" id="table"></div>
+      </details>
+    </div>
+  </div>
+  <p class="cap">Four frontier models serve as the backbone under identical instructions and tools. A task is solved only if all of its hidden success conditions hold without a physical violation.</p>
+</div></section>
+
+<!-- ============================================================ bibtex -->
+<section id="bibtex"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">Citation</span>
+    <h2>BibTeX</h2>
+  </div>
+  <div class="bib">
+    <button type="button" class="copy" data-copy="#bib">Copy</button>
+<pre id="bib">@article{park2026codehoi,
+  title   = {CodeHOI: Code with Agents for Physically Plausible 4D Hand-Object Interaction},
+  author  = {Park, Seonghwan and Chang, Inho and Park, Min-Gyu},
+  journal = {arXiv preprint arXiv:2611.31976},
+  year    = {2026}
+}</pre>
+  </div>
+</div></section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>© 2026 The authors.</p>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip" hidden></div>
+
+<!-- bump ?v= here and on the stylesheet whenever these files change: browsers keep the old ones otherwise -->
+<script src="static/data/site.js?v=20261123o"></script>
+<script src="static/js/main.js?v=20261123o"></script>
+</body>
+</html>
